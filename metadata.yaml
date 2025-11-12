@@ -24,7 +24,7 @@ spec:
     source:
       repo: https://github.com/Ayushi001/terraform-google-log-export.git
       sourceType: git
-    version: 11.1.0
+    version: 11.1.1
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
