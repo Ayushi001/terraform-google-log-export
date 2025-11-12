@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,155 +19,161 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 spec:
-  title: 'Log Export: BigQuery Log Alerting'
-  source:
-    repo: https://github.com/terraform-google-modules/terraform-google-log-export.git
-    sourceType: git
-  actuationTool:
-    type: Terraform
-    version: '>= 0.13'
-  examples:
-  - name: billing_account
-    location: examples/bigquery/billing_account
-  - name: billing_account
-    location: examples/pubsub/billing_account
-  - name: billing_account
-    location: examples/storage/billing_account
-  - name: bq-log-alerting
-    location: examples/bq-log-alerting
-  - name: datadog-sink
-    location: examples/datadog-sink
-  - name: folder
-    location: examples/bigquery/folder
-  - name: folder
-    location: examples/logbucket/folder
-  - name: folder
-    location: examples/pubsub/folder
-  - name: folder
-    location: examples/storage/folder
-  - name: organization
-    location: examples/bigquery/organization
-  - name: organization
-    location: examples/logbucket/organization
-  - name: organization
-    location: examples/pubsub/organization
-  - name: organization
-    location: examples/storage/organization
-  - name: project
-    location: examples/bigquery/project
-  - name: project
-    location: examples/logbucket/project
-  - name: project
-    location: examples/pubsub/project
-  - name: project
-    location: examples/storage/project
-  - name: splunk-sink
-    location: examples/splunk-sink
-  variables:
-  - name: bigquery_location
-    description: Location for BigQuery resources. See https://cloud.google.com/bigquery/docs/locations for valid values.
-    type: string
-    default: US
-    required: false
-  - name: dry_run
-    description: Enable dry_run execution of the Cloud Function. If is true it will just print the object the would be converted as a finding
-    type: bool
-    default: false
-    required: false
-  - name: function_memory
-    description: The amount of memory in megabytes allotted for the Cloud function to use.
-    type: number
-    default: "256"
-    required: false
-  - name: function_region
-    description: Region for the Cloud function resources. See https://cloud.google.com/functions/docs/locations for valid values.
-    type: string
-    required: true
-  - name: function_timeout
-    description: The amount of time in seconds allotted for the execution of the function.
-    type: number
-    default: "540"
-    required: false
-  - name: job_schedule
-    description: The schedule on which the job will be executed in the unix-cron string format (https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules#defining_the_job_schedule). Defaults to 15 minutes.
-    type: string
-    default: '*/15 * * * *'
-    required: false
-  - name: logging_project
-    description: The project to deploy the tool.
-    type: string
-    required: true
-  - name: org_id
-    description: The organization ID for the associated services
-    type: string
-    required: true
-  - name: source_name
-    description: The Security Command Center Source name for the "BQ Log Alerts" Source if the source had been created before. The format is `organizations/<ORG_ID>/sources/<SOURCE_ID>`
-    type: string
-    default: ""
-    required: false
-  - name: time_window_quantity
-    description: The time window quantity used in the query in the view in BigQuery.
-    type: string
-    default: "20"
-    required: false
-  - name: time_window_unit
-    description: The time window unit used in the query in the view in BigQuery. Valid values are 'MICROSECOND', 'MILLISECOND', 'SECOND', 'MINUTE', 'HOUR'
-    type: string
-    default: MINUTE
-    required: false
-  outputs:
-  - name: bq_views_dataset_id
-    description: The ID of the BigQuery Views dataset
-  - name: cloud_function_service_account_email
-    description: The email of the service account created to be used by the Cloud Function
-  - name: cloud_scheduler_job
-    description: The Cloud Scheduler job instance
-  - name: cloud_scheduler_job_name
-    description: The name of the Cloud Scheduler job created
-  - name: pubsub_topic_name
-    description: Pub/Sub topic name
-  - name: source_name
-    description: The Security Command Center Source name for the "BQ Log Alerts" Source
-  roles:
-  - level: Project
+  info:
+    title: "Log Export: BigQuery Log Alerting"
+    source:
+      repo: https://github.com/Ayushi001/terraform-google-log-export.git
+      sourceType: git
+      dir: /modules/bq-log-alerting
+    actuationTool:
+      flavor: Terraform
+      version: ">= 1.3"
+    description: {}
+  content:
+    examples:
+      - name: billing_account
+        location: examples/bigquery/billing_account
+      - name: billing_account
+        location: examples/pubsub/billing_account
+      - name: billing_account
+        location: examples/storage/billing_account
+      - name: bq-log-alerting
+        location: examples/bq-log-alerting
+      - name: datadog-sink
+        location: examples/datadog-sink
+      - name: folder
+        location: examples/bigquery/folder
+      - name: folder
+        location: examples/logbucket/folder
+      - name: folder
+        location: examples/pubsub/folder
+      - name: folder
+        location: examples/storage/folder
+      - name: organization
+        location: examples/bigquery/organization
+      - name: organization
+        location: examples/logbucket/organization
+      - name: organization
+        location: examples/pubsub/organization
+      - name: organization
+        location: examples/storage/organization
+      - name: project
+        location: examples/bigquery/project
+      - name: project
+        location: examples/logbucket/project
+      - name: project
+        location: examples/project/project
+      - name: project
+        location: examples/pubsub/project
+      - name: project
+        location: examples/storage/project
+      - name: splunk-sink
+        location: examples/splunk-sink
+  interfaces:
+    variables:
+      - name: org_id
+        description: The organization ID for the associated services
+        varType: string
+        required: true
+      - name: function_region
+        description: Region for the Cloud function resources. See https://cloud.google.com/functions/docs/locations for valid values.
+        varType: string
+        required: true
+      - name: bigquery_location
+        description: Location for BigQuery resources. See https://cloud.google.com/bigquery/docs/locations for valid values.
+        varType: string
+        defaultValue: US
+      - name: source_name
+        description: The Security Command Center Source name for the "BQ Log Alerts" Source if the source had been created before. The format is `organizations/<ORG_ID>/sources/<SOURCE_ID>`
+        varType: string
+        defaultValue: ""
+      - name: logging_project
+        description: The project to deploy the tool.
+        varType: string
+        required: true
+      - name: job_schedule
+        description: The schedule on which the job will be executed in the unix-cron string format (https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules#defining_the_job_schedule). Defaults to 15 minutes.
+        varType: string
+        defaultValue: "*/15 * * * *"
+      - name: time_window_unit
+        description: The time window unit used in the query in the view in BigQuery. Valid values are 'MICROSECOND', 'MILLISECOND', 'SECOND', 'MINUTE', 'HOUR'
+        varType: string
+        defaultValue: MINUTE
+      - name: time_window_quantity
+        description: The time window quantity used in the query in the view in BigQuery.
+        varType: string
+        defaultValue: "20"
+      - name: dry_run
+        description: Enable dry_run execution of the Cloud Function. If is true it will just print the object the would be converted as a finding
+        varType: bool
+        defaultValue: false
+      - name: function_timeout
+        description: The amount of time in seconds allotted for the execution of the function.
+        varType: number
+        defaultValue: "540"
+      - name: function_memory
+        description: The amount of memory in megabytes allotted for the Cloud function to use.
+        varType: number
+        defaultValue: "256"
+    outputs:
+      - name: bq_views_dataset_id
+        description: The ID of the BigQuery Views dataset
+      - name: cloud_function_service_account_email
+        description: The email of the service account created to be used by the Cloud Function
+      - name: cloud_scheduler_job
+        description: The Cloud Scheduler job instance
+      - name: cloud_scheduler_job_name
+        description: The name of the Cloud Scheduler job created
+      - name: pubsub_topic_name
+        description: Pub/Sub topic name
+      - name: source_name
+        description: The Security Command Center Source name for the "BQ Log Alerts" Source
+  requirements:
     roles:
-    - roles/resourcemanager.projectCreator
-    - roles/logging.configWriter
-  - level: Project
-    roles:
-    - roles/iam.serviceAccountAdmin
-    - roles/storage.admin
-    - roles/pubsub.admin
-    - roles/bigquery.dataOwner
-    - roles/serviceusage.serviceUsageAdmin
-    - roles/resourcemanager.projectIamAdmin
-    - roles/logging.configWriter
-    - roles/cloudfunctions.developer
-    - roles/iam.serviceAccountUser
-    - roles/cloudscheduler.admin
-    - roles/appengine.appCreator
-    - roles/appengine.appAdmin
-  - level: Project
-    roles:
-    - roles/billing.user
-  - level: Project
-    roles:
-    - roles/logging.configWriter
-    - roles/billing.projectManager
-    - roles/securitycenter.sourcesEditor
-    - roles/resourcemanager.organizationAdmin
-  services:
-  - cloudapis.googleapis.com
-  - cloudbuild.googleapis.com
-  - cloudfunctions.googleapis.com
-  - cloudscheduler.googleapis.com
-  - securitycenter.googleapis.com
-  - cloudresourcemanager.googleapis.com
-  - oslogin.googleapis.com
-  - compute.googleapis.com
-  - pubsub.googleapis.com
-  - storage-component.googleapis.com
-  - storage-api.googleapis.com
-  - iam.googleapis.com
-  - cloudbilling.googleapis.com
+      - level: Project
+        roles:
+          - roles/billing.user
+      - level: Project
+        roles:
+          - roles/resourcemanager.projectCreator
+          - roles/logging.configWriter
+      - level: Project
+        roles:
+          - roles/logging.configWriter
+          - roles/billing.projectManager
+          - roles/securitycenter.sourcesEditor
+          - roles/resourcemanager.organizationAdmin
+      - level: Project
+        roles:
+          - roles/iam.serviceAccountAdmin
+          - roles/storage.admin
+          - roles/pubsub.admin
+          - roles/bigquery.dataOwner
+          - roles/serviceusage.serviceUsageAdmin
+          - roles/resourcemanager.projectIamAdmin
+          - roles/logging.configWriter
+          - roles/cloudfunctions.developer
+          - roles/iam.serviceAccountUser
+          - roles/cloudscheduler.admin
+          - roles/appengine.appCreator
+          - roles/appengine.appAdmin
+    services:
+      - cloudapis.googleapis.com
+      - cloudbuild.googleapis.com
+      - cloudfunctions.googleapis.com
+      - cloudscheduler.googleapis.com
+      - securitycenter.googleapis.com
+      - cloudresourcemanager.googleapis.com
+      - oslogin.googleapis.com
+      - compute.googleapis.com
+      - pubsub.googleapis.com
+      - storage-component.googleapis.com
+      - storage-api.googleapis.com
+      - iam.googleapis.com
+      - cloudbilling.googleapis.com
+      - logging.googleapis.com
+    providerVersions:
+      - source: hashicorp/google
+        version: ">= 3.53, < 8"
+      - source: hashicorp/random
+        version: ">= 2.1"

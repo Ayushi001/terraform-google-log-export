@@ -1,0 +1,65 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-google-log-export-display
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: Terraform Log Export Module
+    source:
+      repo: https://github.com/Ayushi001/terraform-google-log-export.git
+      sourceType: git
+  ui:
+    input:
+      variables:
+        bigquery_options:
+          name: bigquery_options
+          title: Bigquery Options
+        description:
+          name: description
+          title: Description
+        destination_uri:
+          name: destination_uri
+          title: Destination Uri
+        disabled:
+          name: disabled
+          title: Disabled
+        exclusions:
+          name: exclusions
+          title: Exclusions
+        filter:
+          name: filter
+          title: Filter
+        include_children:
+          name: include_children
+          title: Include Children
+        intercept_children:
+          name: intercept_children
+          title: Intercept Children
+        log_sink_name:
+          name: log_sink_name
+          title: Log Sink Name
+        parent_resource_id:
+          name: parent_resource_id
+          title: Parent Resource Id
+        parent_resource_type:
+          name: parent_resource_type
+          title: Parent Resource Type
+        unique_writer_identity:
+          name: unique_writer_identity
+          title: Unique Writer Identity

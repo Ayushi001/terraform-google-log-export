@@ -1,0 +1,63 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-google-log-export-display
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: "Log Export: PubSub destination submodule"
+    source:
+      repo: https://github.com/Ayushi001/terraform-google-log-export.git
+      sourceType: git
+      dir: /modules/pubsub
+  ui:
+    input:
+      variables:
+        create_push_subscriber:
+          name: create_push_subscriber
+          title: Create Push Subscriber
+        create_subscriber:
+          name: create_subscriber
+          title: Create Subscriber
+        kms_key_name:
+          name: kms_key_name
+          title: Kms Key Name
+        log_sink_writer_identity:
+          name: log_sink_writer_identity
+          title: Log Sink Writer Identity
+        project_id:
+          name: project_id
+          title: Project Id
+        push_endpoint:
+          name: push_endpoint
+          title: Push Endpoint
+        push_subscription_expiration_ttl:
+          name: push_subscription_expiration_ttl
+          title: Push Subscription Expiration Ttl
+        subscriber_id:
+          name: subscriber_id
+          title: Subscriber Id
+        subscription_labels:
+          name: subscription_labels
+          title: Subscription Labels
+        topic_labels:
+          name: topic_labels
+          title: Topic Labels
+        topic_name:
+          name: topic_name
+          title: Topic Name
