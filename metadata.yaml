@@ -95,11 +95,6 @@ spec:
             spec:
               outputExpr: "bigquery.googleapis.com/projects/${project}/datasets/${env_vars.BIGQUERY_DATASET}"
           - source:
-              source: github.com/terraform-google-modules/terraform-google-pubsub
-              version: ">= 7.0.0"
-            spec:
-              outputExpr: "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/${topic}"
-          - source:
               source: github.com/terraform-google-modules/terraform-google-cloud-storage//modules/simple_bucket
               version: ">= 8.0"
             spec:
